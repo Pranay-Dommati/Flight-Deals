@@ -4,8 +4,8 @@ from twilio.rest import Client
 import smtplib
 from email.mime.text import MIMEText
 from email.header import Header
-account_sid = "AC3eeb1bbcd63b613dc89ce26cbf9cda10"
-auth_token = "13ef7044edbc12b3f61aee2e3c925f14"
+account_sid = YOUR_ACCOUNT_SID
+auth_token = YOUR_AUTH_TOKEN
 client = Client(account_sid, auth_token)
 
 FROM_DATE = (datetime.now()+timedelta(days=1)).strftime("%d/%m/%Y")
@@ -13,14 +13,14 @@ TO_DATE = (datetime.now()+timedelta(days=6*30)).strftime("%d/%m/%Y")
 RETURN_FROM = (datetime.now()+timedelta(days=6*30+7)).strftime("%d/%m/%Y")
 RETURN_TO = (datetime.now()+timedelta(days=6*30+28)).strftime("%d/%m/%Y")
 flight_search_url = "https://api.tequila.kiwi.com/locations/query"
-flight_search_api_key = "Rzqzmue5DPoeUU8MtGNhG85B9InF7ak7"
+flight_search_api_key = your_APIKEY
 flight_get_price_url = "https://api.tequila.kiwi.com/v2/search"
 flight_search_headers = {
     "apikey":flight_search_api_key
 }
-sheety_endpoint = "https://api.sheety.co/1f3d76c7bff772b31243b79f12780634/flightDeals/prices"
-sheety_users_endpoint = "https://api.sheety.co/1f3d76c7bff772b31243b79f12780634/flightDeals/users"
-sheety_token = "Bearer BunnyDommatiGoud"
+sheety_endpoint = YOUR_SHEETY_ENDPOINT
+sheety_users_endpoint = YOUR_SHEETY_PRICES_ENDPOINT
+sheety_token = YOUR_SHEETY_TOKEN
 sheety_headers = {
     "Authorization":sheety_token
 }
@@ -120,5 +120,5 @@ if check_atleast_oneflight ==1:
         for _ in get_emails():
             with smtplib.SMTP("smtp.gmail.com") as connection:
                 connection.starttls()
-                connection.login(user="cseiot12345@gmail.com", password="frvkjodhojvaopwr")
-                connection.sendmail(from_addr="cseiot12345@gmail.com", to_addrs=_, msg=f"Subject:Low price alert!!\n\n{body}")
+                connection.login(user=YOUR_EMAIL, password=YOUR_PASSWORD)
+                connection.sendmail(from_addr=YOUR_EMAIL, to_addrs=_, msg=f"Subject:Low price alert!!\n\n{body}")
